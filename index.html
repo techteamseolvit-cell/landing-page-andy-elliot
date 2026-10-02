@@ -860,6 +860,20 @@ footer .logo-img {
   margin-bottom: 2px;
 }
 
+.tier-price .price-old {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--gray);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--red-lightest);
+  margin-right: 6px;
+}
+
+.tier-price .price-old:empty {
+  display: none;
+}
+
 .tier-features {
   list-style: none;
   margin: 0 0 26px;
@@ -1456,7 +1470,7 @@ footer a {
       <!-- GENERAL -->
       <div class="tier-card">
         <div class="tier-name">General</div>
-        <div class="tier-price">$197</div>
+        <div class="tier-price" data-prices="197,297,397"><span class="price-old">$297</span> <span class="price-now">$197</span></div>
         <ul class="tier-features">
           <li>Acceso completo 2 días</li>
           <li>Material del evento</li>
@@ -1469,7 +1483,7 @@ footer a {
       <div class="tier-card featured">
         <div class="badge">Más popular</div>
         <div class="tier-name">VIP</div>
-        <div class="tier-price">$497</div>
+        <div class="tier-price" data-prices="497,597,697"><span class="price-old">$597</span> <span class="price-now">$497</span></div>
         <ul class="tier-features">
           <li>Todo lo de General</li>
           <li>Asientos preferenciales</li>
@@ -1482,7 +1496,7 @@ footer a {
       <!-- DIAMOND -->
       <div class="tier-card">
         <div class="tier-name">Diamond</div>
-        <div class="tier-price">$1,497</div>
+        <div class="tier-price" data-prices="1497,1597,1697"><span class="price-old">$1,597</span> <span class="price-now">$1,497</span></div>
         <ul class="tier-features">
           <li>Todo lo de VIP</li>
           <li>Primera fila</li>
@@ -1556,7 +1570,7 @@ footer a {
       </div>
       <div class="faq-item">
         <button class="faq-question">¿Necesito hablar inglés y español? <span class="plus">+</span></button>
-        <div class="faq-answer"><p>Sí. El evento combina inglés y español, y una gran parte del contenido — incluyendo las sesiones de Andy Elliott — se da en inglés. Para aprovecharlo al máximo es importante que hables y entiendas ambos idiomas. No habrá traducción simultánea.</p></div>
+        <div class="faq-answer"><p>Sí. El evento combina inglés y español, y una gran parte del contenido — incluyendo las sesiones de Andy Elliott — se da en inglés. Para aprovecharlo al máximo es importante que hables y entiendas ambos idiomas.</p></div>
       </div>
     </div>
   </div>
@@ -1615,8 +1629,24 @@ window.addEventListener("resize", syncStickyBarHeight);
 window.addEventListener("load", syncStickyBarHeight);
 syncStickyBarHeight();
 
+// Precio vigente según la fecha (hora de Arizona, UTC-7). Se muestra el precio
+// actual y, tachado, el siguiente precio; nunca se mencionan las fases.
+function updateTierPrices() {
+  var changes = [Date.UTC(2026, 10, 5, 7), Date.UTC(2026, 11, 8, 7)]; // 5 nov, 8 dic
+  var now = Date.now();
+  var step = now >= changes[1] ? 2 : now >= changes[0] ? 1 : 0;
+  var fmt = function (n) { return "$" + n.toLocaleString("en-US"); };
+
+  document.querySelectorAll(".tier-price[data-prices]").forEach(function (el) {
+    var prices = el.getAttribute("data-prices").split(",").map(Number);
+    el.querySelector(".price-now").textContent = fmt(prices[step]);
+    el.querySelector(".price-old").textContent = step + 1 < prices.length ? fmt(prices[step + 1]) : "";
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   syncStickyBarHeight();
+  updateTierPrices();
 
   // FAQ accordion
   document.querySelectorAll(".faq-item").forEach(function (item) {
