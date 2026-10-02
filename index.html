@@ -809,6 +809,18 @@ footer .logo-img {
   margin-bottom: 2px;
 }
 
+.tier-price small {
+  font-size: 14px;
+  color: var(--gray);
+  font-weight: 400;
+}
+
+.tier-phases {
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
 .tier-features {
   list-style: none;
   margin: 0 0 26px;
@@ -845,6 +857,13 @@ footer .logo-img {
 
 .tier-card.black-tier .tier-name {
   color: var(--silver-light);
+}
+
+.pricing-note {
+  text-align: center;
+  color: var(--gray);
+  font-size: 13px;
+  margin-top: 28px;
 }
 
 /* ---------- Venue ---------- */
@@ -1075,50 +1094,13 @@ footer a {
   }
 }
 
-/* ---------- Ajustes ---------- */
-.process-card {
-  text-align: center;
-}
-
-.final-cta p strong {
-  color: var(--white);
-}
-
-@media (max-width: 900px) {
-  .venue-info {
-    text-align: center;
-  }
-}
-
-@media (max-width: 600px) {
-  .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-  }
-
-  /* Eyebrows centrados: el bullet fluye con el texto y todo queda centrado */
-  .hero-content .eyebrow,
-  .eyebrow[style] {
-    display: block !important;
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  .hero-content .eyebrow::before,
-  .eyebrow[style]::before {
-    display: inline-block;
-    vertical-align: middle;
-    margin: -2px 8px 0 0;
-  }
-}
-
 </style>
 </head>
 <body>
 
 <!-- Barra de urgencia -->
 <div class="sticky-bar">
-  CUPOS LIMITADOS — 8 Y 9 DE ENERO · FOUNTAIN HILLS, AZ · <a href="#pricing">RESERVA TU LUGAR</a>
+  FASE 1 DE PRECIOS ACTIVA — LOS PRECIOS SUBEN EN LA SIGUIENTE FASE · <a href="#pricing">RESERVA TU LUGAR</a>
 </div>
 
 <!-- ========================= HERO ========================= -->
@@ -1169,19 +1151,19 @@ footer a {
 
     <div class="pain-grid">
       <div class="pain-card">
-        <div class="icon">🤹</div>
+        <div class="icon">🎯</div>
         <p>Todo depende de que tú cotices, tú supervises la obra, tú resuelvas cada imprevisto en campo.</p>
       </div>
       <div class="pain-card">
-        <div class="icon">👷</div>
+        <div class="icon">👥</div>
         <p>Tu equipo y tus subcontratistas no rinden igual cuando tú no estás en el proyecto.</p>
       </div>
       <div class="pain-card">
-        <div class="icon">🤯</div>
+        <div class="icon">📈</div>
         <p>Cada proyecto nuevo trae más estrés y más dolores de cabeza, no más libertad.</p>
       </div>
       <div class="pain-card">
-        <div class="icon">🏗️</div>
+        <div class="icon">🔁</div>
         <p>No tienes una constructora. Tienes una obra más grande que administrar tú solo.</p>
       </div>
     </div>
@@ -1396,16 +1378,17 @@ footer a {
 <!-- ========================= PRICING ========================= -->
 <section class="pricing" id="pricing">
   <div class="wrap">
-    <p class="eyebrow" style="justify-content:center;display:flex;">Cupos limitados</p>
+    <p class="eyebrow" style="justify-content:center;display:flex;">Cupos limitados · Fase 1 activa</p>
     <h2 class="section-title">RESERVA TU <span class="accent">LUGAR</span></h2>
-    <p class="section-sub">Elige cómo quieres vivir One Revolution y asegura tu lugar hoy.</p>
+    <p class="section-sub">Los precios suben en cada fase. Entre más rápido decidas, menos pagas.</p>
 
     <div class="pricing-grid">
 
       <!-- GENERAL -->
       <div class="tier-card">
         <div class="tier-name">General</div>
-        <div class="tier-price">$197</div>
+        <div class="tier-price">$197 <small>Fase 1</small></div>
+        <div class="tier-phases">Fase 2: $297 · Fase 3: $397</div>
         <ul class="tier-features">
           <li>Acceso completo 2 días</li>
           <li>Material del evento</li>
@@ -1418,7 +1401,8 @@ footer a {
       <div class="tier-card featured">
         <div class="badge">Más popular</div>
         <div class="tier-name">VIP</div>
-        <div class="tier-price">$497</div>
+        <div class="tier-price">$497 <small>Fase 1</small></div>
+        <div class="tier-phases">Fase 2: $597 · Fase 3: $697</div>
         <ul class="tier-features">
           <li>Todo lo de General</li>
           <li>Asientos preferenciales</li>
@@ -1431,7 +1415,8 @@ footer a {
       <!-- DIAMOND -->
       <div class="tier-card">
         <div class="tier-name">Diamond</div>
-        <div class="tier-price">$1,497</div>
+        <div class="tier-price">$1,497 <small>Fase 1</small></div>
+        <div class="tier-phases">Fase 2: $1,597 · Fase 3: $1,697</div>
         <ul class="tier-features">
           <li>Todo lo de VIP</li>
           <li>Primera fila</li>
@@ -1446,6 +1431,7 @@ footer a {
         <div class="tier-name">Empire Black</div>
         <div class="tier-seats">Solo 5 cupos · viaje incluido</div>
         <div class="tier-price">$5,000</div>
+        <div class="tier-phases">Precio único · sin fases</div>
         <ul class="tier-features">
           <li>Todo lo de Diamond</li>
           <li>Viaje incluido</li>
@@ -1457,6 +1443,10 @@ footer a {
 
     </div>
 
+    <p class="pricing-note">
+      General, VIP y Diamond se compran directamente en línea. Empire Black es por invitación —
+      agenda una llamada para calificar.
+    </p>
   </div>
 </section>
 
@@ -1496,6 +1486,10 @@ footer a {
         <div class="faq-answer"><p>Todos los tickets incluyen acceso completo a los 2 días del evento. Los niveles VIP, Diamond y Empire Black suman beneficios adicionales como asientos preferenciales, networking exclusivo y acceso directo a speakers — revisa el detalle en cada tarjeta de precio.</p></div>
       </div>
       <div class="faq-item">
+        <button class="faq-question">¿Por qué suben los precios por fase? <span class="plus">+</span></button>
+        <div class="faq-answer"><p>Los cupos son limitados por nivel. Conforme se acerca la fecha del evento, el precio sube por fase — entre antes reserves tu lugar, mejor precio obtienes.</p></div>
+      </div>
+      <div class="faq-item">
         <button class="faq-question">¿Cómo funciona el ticket Empire Black? <span class="plus">+</span></button>
         <div class="faq-answer"><p>Empire Black es un cupo limitado a 5 personas e incluye viaje. No se compra directamente en línea — primero se agenda una llamada de calificación para asegurar que la experiencia sea la adecuada para ti.</p></div>
       </div>
@@ -1515,8 +1509,8 @@ footer a {
 <section class="final-cta">
   <div class="wrap">
     <h2>TU EMPRESA NO VA A <span class="accent">ESCALAR SOLA</span></h2>
-    <p>Cada día que sigues cotizando, supervisando y apagando incendios tú solo, es un día más que tu empresa depende de ti. Nadie va a venir a cambiarlo por ti. <strong>Los dueños que escalan no esperan el momento perfecto. Deciden y actúan. Hoy te toca a ti tomar acción.</strong></p>
-    <a href="#pricing" class="btn btn-red">Sí, quiero escalar mi empresa</a>
+    <p>8 y 9 de enero, en Fountain Hills, Arizona. Los cupos de Fase 1 son limitados.</p>
+    <a href="#pricing" class="btn btn-red">Reservar mi lugar ahora</a>
   </div>
 </section>
 
