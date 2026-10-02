@@ -1075,14 +1075,10 @@ footer a {
   }
 }
 
-/* ---------- Formulario de registro ---------- */
-.registro {
-  background: var(--black);
-}
-
+/* ---------- Formulario de registro (CTA final) ---------- */
 .form-wrap {
   max-width: 720px;
-  margin: 40px auto 0;
+  margin: 0 auto;
   border-radius: 15px;
   overflow: hidden;
 }
@@ -1478,36 +1474,6 @@ footer a {
 </section>
 
 <!-- ========================= VENUE ========================= -->
-<section class="registro" id="registro">
-  <div class="wrap">
-    <p class="eyebrow" style="justify-content:center;display:flex;">Registro</p>
-    <h2 class="section-title">ASEGURA TU <span class="accent">LUGAR</span></h2>
-    <p class="section-sub">Déjanos tus datos y nuestro equipo te contactará para confirmar tu registro.</p>
-    <div class="form-wrap">
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/form/qln5FZeNxjWWN9XkKXoW"
-        style="width:100%;height:1092px;border:none;border-radius:15px"
-        id="inline-qln5FZeNxjWWN9XkKXoW"
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-trigger-value=""
-        data-activation-type="alwaysActivated"
-        data-activation-value=""
-        data-deactivation-type="neverDeactivate"
-        data-deactivation-value=""
-        data-form-name="Andy Elliot | Evento presencial | AVG"
-        data-height="1092"
-        data-layout-iframe-id="inline-qln5FZeNxjWWN9XkKXoW"
-        data-form-id="qln5FZeNxjWWN9XkKXoW"
-        data-cookie-consent="true"
-        data-cookie-consent-provider="auto"
-        title="Andy Elliot | Evento presencial | AVG">
-      </iframe>
-    </div>
-  </div>
-</section>
-<script src="https://link.msgsndr.com/js/form_embed.js"></script>
-
 <section id="venue">
   <div class="wrap">
     <p class="eyebrow" style="justify-content:center;display:flex;">El lugar</p>
@@ -1559,11 +1525,32 @@ footer a {
 </section>
 
 <!-- ========================= FINAL CTA ========================= -->
-<section class="final-cta">
+<section class="final-cta" id="registro">
   <div class="wrap">
     <h2>TU EMPRESA NO VA A <span class="accent">ESCALAR SOLA</span></h2>
     <p>Cada día que sigues cotizando, supervisando y apagando incendios tú solo, es un día más que tu empresa depende de ti. Nadie va a venir a cambiarlo por ti. <strong>Los dueños que escalan no esperan el momento perfecto. Deciden y actúan. Hoy te toca a ti tomar acción.</strong></p>
-    <a href="#pricing" class="btn btn-red">Sí, quiero escalar mi empresa</a>
+    <div class="form-wrap">
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/qln5FZeNxjWWN9XkKXoW"
+        style="width:100%;height:1092px;border:none;border-radius:15px"
+        id="inline-qln5FZeNxjWWN9XkKXoW"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Andy Elliot | Evento presencial | AVG"
+        data-height="1092"
+        data-layout-iframe-id="inline-qln5FZeNxjWWN9XkKXoW"
+        data-form-id="qln5FZeNxjWWN9XkKXoW"
+        data-cookie-consent="true"
+        data-cookie-consent-provider="auto"
+        title="Andy Elliot | Evento presencial | AVG">
+      </iframe>
+    </div>
+    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
   </div>
 </section>
 
