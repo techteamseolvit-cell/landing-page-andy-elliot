@@ -925,85 +925,13 @@ footer .logo-img {
   box-shadow: 0 0 16px rgba(228, 57, 60, 0.45);
 }
 
-/* Banner de urgencia en precios */
-.promo-banner {
-  text-align: center;
-  max-width: 760px;
-  margin: 0 auto 40px;
-  padding: 26px 22px;
-  border: 1px solid rgba(228, 57, 60, 0.55);
-  border-radius: var(--radius);
-  background: radial-gradient(ellipse 80% 120% at 50% 0%, rgba(228, 57, 60, 0.28), transparent 70%), #0b0b0b;
-  box-shadow: 0 0 40px rgba(228, 57, 60, 0.18);
-}
-
+/* Título de urgencia en precios */
 .promo-title {
-  display: block;
-  font-family: "Oswald", Arial, sans-serif;
-  font-size: clamp(30px, 5.4vw, 54px);
-  font-weight: 700;
-  line-height: 1.05;
-  text-transform: uppercase;
+  font-size: clamp(36px, 6vw, 64px);
   background: linear-gradient(180deg, #ff6b6e 0%, #e4393c 50%, #c4181b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-}
-
-.promo-sub {
-  display: block;
-  margin-top: 8px;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--white);
-}
-
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 16px;
-}
-
-.countdown[hidden] {
-  display: none;
-}
-
-.countdown div {
-  min-width: 68px;
-  padding: 10px 6px;
-  border-radius: 10px;
-  background: var(--black-3);
-  border: 1px solid var(--border);
-}
-
-.countdown strong {
-  display: block;
-  font-family: "Oswald", Arial, sans-serif;
-  font-size: 30px;
-  line-height: 1;
-  color: var(--white);
-}
-
-.countdown span {
-  display: block;
-  margin-top: 4px;
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gray);
-}
-
-@media (max-width: 600px) {
-  .countdown div {
-    min-width: 58px;
-  }
-
-  .countdown strong {
-    font-size: 24px;
-  }
 }
 
 .tier-features {
@@ -1608,17 +1536,7 @@ footer a {
 <!-- ========================= PRICING ========================= -->
 <section class="pricing" id="pricing">
   <div class="wrap">
-    <div class="promo-banner">
-      <span class="promo-title" data-promo-title>Preventa Early Bird</span>
-      <span class="promo-sub" data-promo-sub>Hasta 50% OFF · Este precio termina en</span>
-      <div class="countdown" data-countdown>
-        <div><strong data-cd="d">00</strong><span>Días</span></div>
-        <div><strong data-cd="h">00</strong><span>Horas</span></div>
-        <div><strong data-cd="m">00</strong><span>Min</span></div>
-        <div><strong data-cd="s">00</strong><span>Seg</span></div>
-      </div>
-    </div>
-    <h2 class="section-title">RESERVA TU <span class="accent">LUGAR</span></h2>
+    <h2 class="section-title promo-title" data-promo-title>Preventa Early Bird</h2>
     <p class="section-sub">Cupos limitados. Elige cómo quieres vivir One Revolution y asegura tu lugar hoy.</p>
 
     <div class="pricing-grid">
@@ -1811,43 +1729,16 @@ function updateTierPrices() {
 
   var titles = ["Preventa Early Bird", "Precio especial", "Últimos cupos disponibles"];
   var title = document.querySelector("[data-promo-title]");
-  var sub = document.querySelector("[data-promo-sub]");
   var bar = document.querySelector("[data-bar-text]");
   var offText = maxOff > 0 ? "Hasta " + maxOff + "% OFF" : "Cupos limitados";
   if (title) title.textContent = titles[step];
-  if (sub) sub.textContent = step < 2 ? offText + " · Este precio termina en" : offText + " · Asegura tu lugar antes de que se agoten";
   if (bar) bar.textContent = "🔥 " + titles[step].toUpperCase() + " — " + offText.toUpperCase();
 }
 
-function updateCountdown() {
-  var box = document.querySelector("[data-countdown]");
-  if (!box) return;
-  var now = Date.now();
-  var step = priceStep(now);
-  if (step >= PRICE_CHANGES.length) {
-    box.hidden = true;
-    return;
-  }
-  var left = Math.max(0, PRICE_CHANGES[step] - now);
-  var pad = function (n) { return (n < 10 ? "0" : "") + n; };
-  var parts = {
-    d: Math.floor(left / 86400000),
-    h: Math.floor(left / 3600000) % 24,
-    m: Math.floor(left / 60000) % 60,
-    s: Math.floor(left / 1000) % 60
-  };
-  Object.keys(parts).forEach(function (k) {
-    var el = box.querySelector('[data-cd="' + k + '"]');
-    if (el) el.textContent = pad(parts[k]);
-  });
-  if (left === 0) updateTierPrices();
-}
 
 document.addEventListener("DOMContentLoaded", function () {
   syncStickyBarHeight();
   updateTierPrices();
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
 
   // FAQ accordion
   document.querySelectorAll(".faq-item").forEach(function (item) {
