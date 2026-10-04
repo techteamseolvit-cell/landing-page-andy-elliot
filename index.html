@@ -1204,6 +1204,7 @@ footer a {
 
 /* ---------- Formulario de registro (CTA final) ---------- */
 .form-wrap {
+  scroll-margin-top: calc(var(--sticky-height, 42px) + 16px);
   max-width: 720px;
   margin: 0 auto;
   border-radius: 15px;
@@ -1651,11 +1652,11 @@ footer a {
 </section>
 
 <!-- ========================= FINAL CTA ========================= -->
-<section class="final-cta" id="registro">
+<section class="final-cta">
   <div class="wrap">
     <h2>TU EMPRESA NO VA A <span class="accent">ESCALAR SOLA</span></h2>
     <p>Cada día que sigues cotizando, supervisando y apagando incendios tú solo, es un día más que tu empresa depende de ti. Nadie va a venir a cambiarlo por ti. <strong>Los dueños que escalan no esperan el momento perfecto. Deciden y actúan. Hoy te toca a ti tomar acción.</strong></p>
-    <div class="form-wrap">
+    <div class="form-wrap" id="registro">
       <iframe
         src="https://api.leadconnectorhq.com/widget/form/qln5FZeNxjWWN9XkKXoW"
         style="width:100%;height:1092px;border:none;border-radius:15px"
@@ -1739,6 +1740,18 @@ function updateTierPrices() {
 document.addEventListener("DOMContentLoaded", function () {
   syncStickyBarHeight();
   updateTierPrices();
+
+  // Botones "Reservar / Comprar" llevan directo al formulario (también dentro de GHL)
+  document.querySelectorAll('a[href="#registro"]').forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var form = document.getElementById("registro");
+      if (!form) return;
+      e.preventDefault();
+      var offset = (document.querySelector(".sticky-bar") || {}).offsetHeight || 0;
+      var top = form.getBoundingClientRect().top + window.pageYOffset - offset - 16;
+      window.scrollTo({ top: top, behavior: "smooth" });
+    });
+  });
 
   // FAQ accordion
   document.querySelectorAll(".faq-item").forEach(function (item) {
