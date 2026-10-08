@@ -1202,6 +1202,76 @@ footer a {
   }
 }
 
+/* ---------- Popup de compra ---------- */
+.ticket-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.ticket-modal.open {
+  display: flex;
+}
+
+.ticket-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.ticket-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--black-3);
+  border: 1px solid rgba(228, 57, 60, 0.45);
+  border-radius: var(--radius);
+  padding: 28px 20px 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(228, 57, 60, 0.15);
+}
+
+.ticket-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ticket-modal-title {
+  font-size: 24px;
+  text-align: center;
+  margin: 0 36px 6px;
+}
+
+.ticket-modal-sub {
+  text-align: center;
+  color: var(--gray);
+  font-size: 14px;
+  margin: 0 0 18px;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
 /* ---------- Formulario de registro (CTA final) ---------- */
 .form-wrap {
   scroll-margin-top: calc(var(--sticky-height, 42px) + 16px);
@@ -1550,7 +1620,7 @@ footer a {
           <li>Acceso completo al evento de dos días</li>
           <li>Networking con empresarios de alto nivel</li>
         </ul>
-        <a href="#registro" class="btn btn-outline btn-block">Comprar ahora</a>
+        <a href="#registro" data-ticket="general" class="btn btn-outline btn-block">Comprar ahora</a>
       </div>
 
       <!-- VIP -->
@@ -1565,7 +1635,7 @@ footer a {
           <li>Meet &amp; Greet / foto</li>
           <li>Acceso prioritario</li>
         </ul>
-        <a href="#registro" class="btn btn-red btn-block">Comprar ahora</a>
+        <a href="#registro" data-ticket="vip" class="btn btn-red btn-block">Comprar ahora</a>
       </div>
 
       <!-- DIAMOND -->
@@ -1578,7 +1648,7 @@ footer a {
           <li>Mastermind exclusivo con Andy Elliott en sus oficinas después del evento</li>
           <li>Seating premium</li>
         </ul>
-        <a href="#registro" class="btn btn-outline btn-block">Comprar ahora</a>
+        <a href="#registro" data-ticket="diamond" class="btn btn-outline btn-block">Comprar ahora</a>
       </div>
 
       <!-- EMPIRE BLACK -->
@@ -1592,7 +1662,7 @@ footer a {
           <li>Acceso más cercano al equipo / mentores</li>
           <li>Mejores sillas del evento</li>
         </ul>
-        <a href="https://yosoyempresarioone.com/llamada-empire-black-page" class="btn btn-red btn-block">Agendar llamada</a>
+        <a href="https://onerevolutionevent.com/llamada-empire-black-page" class="btn btn-red btn-block">Agendar llamada</a>
       </div>
 
     </div>
@@ -1659,7 +1729,7 @@ footer a {
     <div class="form-wrap" id="registro">
       <iframe
         src="https://api.leadconnectorhq.com/widget/form/qln5FZeNxjWWN9XkKXoW"
-        style="width:100%;height:1092px;border:none;border-radius:15px"
+        style="width:100%;height:984px;border:none;border-radius:15px"
         id="inline-qln5FZeNxjWWN9XkKXoW"
         data-layout="{'id':'INLINE'}"
         data-trigger-type="alwaysShow"
@@ -1668,13 +1738,13 @@ footer a {
         data-activation-value=""
         data-deactivation-type="neverDeactivate"
         data-deactivation-value=""
-        data-form-name="Andy Elliot | Evento presencial | AVG"
-        data-height="1092"
+        data-form-name="Andy Elliot | Boleto general"
+        data-height="984"
         data-layout-iframe-id="inline-qln5FZeNxjWWN9XkKXoW"
         data-form-id="qln5FZeNxjWWN9XkKXoW"
         data-cookie-consent="true"
         data-cookie-consent-provider="auto"
-        title="Andy Elliot | Evento presencial | AVG">
+        title="Andy Elliot | Boleto general">
       </iframe>
     </div>
     <script src="https://link.msgsndr.com/js/form_embed.js"></script>
@@ -1742,7 +1812,49 @@ document.addEventListener("DOMContentLoaded", function () {
   updateTierPrices();
 
   // Botones "Reservar / Comprar" llevan directo al formulario (también dentro de GHL)
-  document.querySelectorAll('a[href="#registro"]').forEach(function (link) {
+  // Popup de compra por tipo de entrada
+  var modal = document.getElementById("ticket-modal");
+  var modalTitle = document.getElementById("ticket-modal-title");
+
+  function openTicket(type) {
+    if (!modal) return false;
+    var box = modal.querySelector('[data-ticket-form="' + type + '"]');
+    if (!box) return false;
+    modal.querySelectorAll("[data-ticket-form]").forEach(function (f) { f.hidden = f !== box; });
+    var frame = box.querySelector("iframe");
+    if (frame && !frame.getAttribute("src")) frame.setAttribute("src", frame.getAttribute("data-src"));
+    modalTitle.textContent = "Entrada " + box.getAttribute("data-ticket-label");
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    return true;
+  }
+
+  function closeTicket() {
+    if (!modal) return;
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  }
+
+  document.querySelectorAll("[data-ticket]").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      if (openTicket(link.getAttribute("data-ticket"))) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-close-modal]").forEach(function (el) {
+    el.addEventListener("click", closeTicket);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeTicket();
+  });
+
+  document.querySelectorAll('a[href="#registro"]:not([data-ticket])').forEach(function (link) {
     link.addEventListener("click", function (e) {
       var form = document.getElementById("registro");
       if (!form) return;
@@ -1780,5 +1892,78 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+<!-- ========================= POPUP DE COMPRA ========================= -->
+<div class="ticket-modal" id="ticket-modal" aria-hidden="true">
+  <div class="ticket-modal-backdrop" data-close-modal></div>
+  <div class="ticket-modal-box" role="dialog" aria-modal="true" aria-labelledby="ticket-modal-title">
+    <button type="button" class="ticket-modal-close" data-close-modal aria-label="Cerrar">&times;</button>
+    <h3 class="ticket-modal-title" id="ticket-modal-title">Completa tus datos</h3>
+    <p class="ticket-modal-sub">Al enviar el formulario pasas directo al pago de tu entrada.</p>
+    <div class="ticket-form" data-ticket-form="general" data-ticket-label="General" hidden>
+        <iframe
+          data-src="https://api.leadconnectorhq.com/widget/form/qln5FZeNxjWWN9XkKXoW"
+          style="width:100%;height:984px;border:none;border-radius:15px"
+          id="popup-qln5FZeNxjWWN9XkKXoW"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Andy Elliot | Boleto general"
+          data-height="984"
+          data-layout-iframe-id="popup-qln5FZeNxjWWN9XkKXoW"
+          data-form-id="qln5FZeNxjWWN9XkKXoW"
+          data-cookie-consent="true"
+          data-cookie-consent-provider="auto"
+          title="Andy Elliot | Boleto general">
+        </iframe>
+    </div>
+    <div class="ticket-form" data-ticket-form="vip" data-ticket-label="VIP" hidden>
+        <iframe
+          data-src="https://api.leadconnectorhq.com/widget/form/xEbd8cVTwUgErAMNad6Q"
+          style="width:100%;height:984px;border:none;border-radius:15px"
+          id="inline-xEbd8cVTwUgErAMNad6Q"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Andy Elliot | Boleto VIP"
+          data-height="984"
+          data-layout-iframe-id="inline-xEbd8cVTwUgErAMNad6Q"
+          data-form-id="xEbd8cVTwUgErAMNad6Q"
+          data-cookie-consent="true"
+          data-cookie-consent-provider="auto"
+          title="Andy Elliot | Boleto VIP">
+        </iframe>
+    </div>
+    <div class="ticket-form" data-ticket-form="diamond" data-ticket-label="Diamond" hidden>
+        <iframe
+          data-src="https://api.leadconnectorhq.com/widget/form/UkYH516qsVkN6cxnzPht"
+          style="width:100%;height:984px;border:none;border-radius:15px"
+          id="inline-UkYH516qsVkN6cxnzPht"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Andy Elliot | Boleto DIAMOND"
+          data-height="984"
+          data-layout-iframe-id="inline-UkYH516qsVkN6cxnzPht"
+          data-form-id="UkYH516qsVkN6cxnzPht"
+          data-cookie-consent="true"
+          data-cookie-consent-provider="auto"
+          title="Andy Elliot | Boleto DIAMOND">
+        </iframe>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
