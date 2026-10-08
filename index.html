@@ -1324,20 +1324,6 @@ body.modal-open {
   overflow: hidden;
 }
 
-/* ---------- Formulario de registro (CTA final) ---------- */
-.form-wrap {
-  scroll-margin-top: calc(var(--sticky-height, 42px) + 16px);
-  max-width: 720px;
-  margin: 0 auto;
-  border-radius: 15px;
-  overflow: hidden;
-}
-
-.form-wrap iframe {
-  display: block;
-  min-height: 600px;
-}
-
 /* ---------- Ajustes ---------- */
 .process-card {
   text-align: center;
@@ -1381,7 +1367,7 @@ body.modal-open {
 
 <!-- Barra de urgencia -->
 <div class="sticky-bar">
-  <span data-bar-text>🔥 PREVENTA EARLY BIRD — HASTA 50% OFF</span> · 8 Y 9 DE ENERO · <a href="#registro">RESERVA TU LUGAR</a>
+  <span data-bar-text>🔥 PREVENTA EARLY BIRD — HASTA 50% OFF</span> · 8 Y 9 DE ENERO · <a href="#pricing">RESERVA TU LUGAR</a>
 </div>
 
 <!-- ========================= HERO ========================= -->
@@ -1396,7 +1382,7 @@ body.modal-open {
           listos para dejar de resolverlo todo en la obra y construir una empresa que escala sola.
         </p>
         <div class="hero-ctas">
-          <a href="#registro" class="btn btn-red">Reservar mi lugar</a>
+          <a href="#pricing" class="btn btn-red">Reservar mi lugar</a>
           <a href="#speakers" class="btn btn-outline">Ver speakers</a>
         </div>
       </div>
@@ -1672,7 +1658,7 @@ body.modal-open {
           <li>Acceso completo al evento de dos días</li>
           <li>Networking con empresarios de alto nivel</li>
         </ul>
-        <a href="#registro" data-ticket="general" class="btn btn-outline btn-block">Comprar ahora</a>
+        <a href="#pricing" data-ticket="general" class="btn btn-outline btn-block">Comprar ahora</a>
       </div>
 
       <!-- VIP -->
@@ -1687,7 +1673,7 @@ body.modal-open {
           <li>Meet &amp; Greet / foto</li>
           <li>Acceso prioritario</li>
         </ul>
-        <a href="#registro" data-ticket="vip" class="btn btn-red btn-block">Comprar ahora</a>
+        <a href="#pricing" data-ticket="vip" class="btn btn-red btn-block">Comprar ahora</a>
       </div>
 
       <!-- DIAMOND -->
@@ -1700,7 +1686,7 @@ body.modal-open {
           <li>Mastermind exclusivo con Andy Elliott en sus oficinas después del evento</li>
           <li>Seating premium</li>
         </ul>
-        <a href="#registro" data-ticket="diamond" class="btn btn-outline btn-block">Comprar ahora</a>
+        <a href="#pricing" data-ticket="diamond" class="btn btn-outline btn-block">Comprar ahora</a>
       </div>
 
       <!-- EMPIRE BLACK -->
@@ -1778,28 +1764,7 @@ body.modal-open {
   <div class="wrap">
     <h2>TU EMPRESA NO VA A <span class="accent">ESCALAR SOLA</span></h2>
     <p>Cada día que sigues cotizando, supervisando y apagando incendios tú solo, es un día más que tu empresa depende de ti. Nadie va a venir a cambiarlo por ti. <strong>Los dueños que escalan no esperan el momento perfecto. Deciden y actúan. Hoy te toca a ti tomar acción.</strong></p>
-    <div class="form-wrap" id="registro">
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/form/qln5FZeNxjWWN9XkKXoW"
-        style="width:100%;height:984px;border:none;border-radius:15px"
-        id="inline-qln5FZeNxjWWN9XkKXoW"
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-trigger-value=""
-        data-activation-type="alwaysActivated"
-        data-activation-value=""
-        data-deactivation-type="neverDeactivate"
-        data-deactivation-value=""
-        data-form-name="Andy Elliot | Boleto general"
-        data-height="984"
-        data-layout-iframe-id="inline-qln5FZeNxjWWN9XkKXoW"
-        data-form-id="qln5FZeNxjWWN9XkKXoW"
-        data-cookie-consent="true"
-        data-cookie-consent-provider="auto"
-        title="Andy Elliot | Boleto general">
-      </iframe>
-    </div>
-    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+    <a href="#pricing" class="btn btn-red">Reservar mi lugar</a>
   </div>
 </section>
 
@@ -1863,7 +1828,6 @@ document.addEventListener("DOMContentLoaded", function () {
   syncStickyBarHeight();
   updateTierPrices();
 
-  // Botones "Reservar / Comprar" llevan directo al formulario (también dentro de GHL)
   // Popup de compra por tipo de entrada
   var modal = document.getElementById("ticket-modal");
   var modalTitle = document.getElementById("ticket-modal-title");
@@ -1910,9 +1874,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.key === "Escape") closeTicket();
   });
 
-  document.querySelectorAll('a[href="#registro"]:not([data-ticket])').forEach(function (link) {
+  // Botones "Reservar mi lugar" llevan a los paquetes (también dentro de GHL)
+  document.querySelectorAll('a[href="#pricing"]:not([data-ticket])').forEach(function (link) {
     link.addEventListener("click", function (e) {
-      var form = document.getElementById("registro");
+      var form = document.getElementById("pricing");
       if (!form) return;
       e.preventDefault();
       var offset = (document.querySelector(".sticky-bar") || {}).offsetHeight || 0;
@@ -2043,6 +2008,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </div>
 </div>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 
 </body>
 </html>
