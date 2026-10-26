@@ -859,6 +859,65 @@ footer .logo-img {
   margin-bottom: 4px;
 }
 
+/* Fecha y lugar destacados */
+.event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+.event-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(228, 57, 60, 0.45);
+  border-radius: 999px;
+  background: rgba(228, 57, 60, 0.1);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.event-meta svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: none;
+  stroke: var(--red-lightest);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.event-meta-center {
+  justify-content: center;
+  margin: 0 auto 22px;
+}
+
+@media (max-width: 900px) {
+  .hero-content .event-meta {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .event-meta span {
+    font-size: 14px;
+    padding: 7px 12px;
+  }
+}
+
+.tier-seats.tier-seats-urgent {
+  color: var(--red-lightest);
+  font-weight: 800;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
 .tier-seats {
   font-size: 12px;
   color: var(--gray);
@@ -1399,7 +1458,7 @@ body.modal-open {
 
 <!-- Barra de urgencia -->
 <div class="sticky-bar">
-  <span data-bar-text>🔥 PREVENTA EARLY BIRD — HASTA 50% OFF</span> · 8 Y 9 DE ENERO · <a href="#registro">RESERVA TU LUGAR</a>
+  <span data-bar-text>🔥 PREVENTA EARLY BIRD — HASTA 50% OFF</span> · 8 Y 9 DE ENERO · ARIZONA · <a href="#registro">RESERVA TU LUGAR</a>
 </div>
 
 <!-- ========================= HERO ========================= -->
@@ -1407,7 +1466,10 @@ body.modal-open {
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-content">
-        <span class="eyebrow">8 &amp; 9 de Enero · Fountain Hills, AZ</span>
+        <div class="event-meta">
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M3.5 9h17M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 19 20.5H5A1.5 1.5 0 0 1 3.5 19V6A1.5 1.5 0 0 1 5 4.5Z"/></svg>8 y 9 de enero</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Fountain Hills, Arizona</span>
+        </div>
         <h1>Descubre cómo <span class="accent">escalar tu empresa de construcción</span> sin tener que hacerlo todo&nbsp;tú.</h1>
         <p class="lead">
           Un evento de 2 días para dueños de empresas de construcción que ya facturan $30K&ndash;$50K+ al mes y están
@@ -1597,7 +1659,7 @@ body.modal-open {
           <li>Estás listo para dejar de ser tú quien resuelve cada problema de obra</li>
           <li>Quieres construir sistemas y equipo, no solo ganar más proyectos</li>
           <li>Buscas rodearte de otros dueños de constructoras en tu mismo nivel</li>
-          <li>Hablas inglés y español (gran parte del evento se da en inglés)</li>
+          <li>Quieres aprender en tu idioma: el evento es 100% en español</li>
         </ul>
       </div>
       <div class="audience-card no">
@@ -1607,7 +1669,6 @@ body.modal-open {
           <li>Buscas una fórmula rápida sin implementar nada en tu operación</li>
           <li>No estás dispuesto a invertir en escalar tu constructora</li>
           <li>No puedes asistir presencialmente los 2 días completos</li>
-          <li>No hablas ni entiendes inglés y español</li>
         </ul>
       </div>
     </div>
@@ -1673,6 +1734,10 @@ body.modal-open {
 <section class="pricing" id="pricing">
   <div class="wrap">
     <h2 class="section-title promo-title" data-promo-title>Preventa Early Bird</h2>
+    <div class="event-meta event-meta-center">
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M3.5 9h17M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 19 20.5H5A1.5 1.5 0 0 1 3.5 19V6A1.5 1.5 0 0 1 5 4.5Z"/></svg>8 y 9 de enero</span>
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Fountain Hills, Arizona</span>
+    </div>
     <p class="section-sub">Cupos limitados. Elige cómo quieres vivir One Revolution y asegura tu lugar hoy.</p>
 
     <div class="pricing-grid">
@@ -1680,6 +1745,7 @@ body.modal-open {
       <!-- GENERAL -->
       <div class="tier-card">
         <div class="tier-name">General</div>
+        <div class="tier-seats tier-seats-urgent">🔥 Solo 120 boletos disponibles</div>
         <div class="tier-price" data-prices="197,297,397" data-ref="397"><span class="price-old">$397</span> <span class="price-now">$197</span> <span class="price-off">50% OFF</span></div>
         <ul class="tier-features">
           <li>Acceso completo al evento de dos días</li>
@@ -1779,8 +1845,8 @@ body.modal-open {
         <div class="faq-answer"><p>No. One Revolution está diseñado para dueños de empresas de construcción que ya facturan al menos $30K–$50K al mes y están listos para escalar su operación más allá de su esfuerzo personal en la obra.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">¿Necesito hablar inglés y español? <span class="plus">+</span></button>
-        <div class="faq-answer"><p>Sí. El evento combina inglés y español, y una gran parte del contenido — incluyendo las sesiones de Andy Elliott — se da en inglés. Para aprovecharlo al máximo es importante que hables y entiendas ambos idiomas.</p></div>
+        <button class="faq-question">¿En qué idioma es el evento? <span class="plus">+</span></button>
+        <div class="faq-answer"><p>El evento es 100% en español. Todas las sesiones, incluyendo las de Andy Elliott, se viven en español para que aproveches al máximo cada contenido.</p></div>
       </div>
     </div>
   </div>
@@ -1790,6 +1856,10 @@ body.modal-open {
 <section class="final-cta">
   <div class="wrap">
     <h2>TU EMPRESA NO VA A <span class="accent">ESCALAR SOLA</span></h2>
+    <div class="event-meta event-meta-center">
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M3.5 9h17M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 19 20.5H5A1.5 1.5 0 0 1 3.5 19V6A1.5 1.5 0 0 1 5 4.5Z"/></svg>8 y 9 de enero</span>
+      <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Fountain Hills, Arizona</span>
+    </div>
     <p>Cada día que sigues cotizando, supervisando y apagando incendios tú solo, es un día más que tu empresa depende de ti. Nadie va a venir a cambiarlo por ti. <strong>Los dueños que escalan no esperan el momento perfecto. Deciden y actúan. Hoy te toca a ti tomar acción.</strong></p>
     <div class="form-wrap" id="registro">
       <iframe
