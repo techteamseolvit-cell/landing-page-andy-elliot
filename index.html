@@ -962,7 +962,7 @@ footer .logo-img {
   display: none;
 }
 
-.tier-price[data-prices] {
+.tier-price-offer {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1471,7 +1471,7 @@ body.modal-open {
 
 <!-- Barra de urgencia -->
 <div class="sticky-bar">
-  <span data-bar-text>🔥 EARLY BLACK FRIDAY — HASTA 88% OFF</span> · 8 Y 9 DE ENERO · ARIZONA · <a href="#registro">RESERVA TU LUGAR</a>
+  <span>🔥 EARLY BLACK FRIDAY — HASTA 88% OFF</span> · 8 Y 9 DE ENERO · ARIZONA · <a href="#registro">RESERVA TU LUGAR</a>
 </div>
 
 <!-- ========================= HERO ========================= -->
@@ -1750,7 +1750,7 @@ body.modal-open {
 <!-- ========================= PRICING ========================= -->
 <section class="pricing" id="pricing">
   <div class="wrap">
-    <h2 class="section-title promo-title" data-promo-title>Early Black Friday</h2>
+    <h2 class="section-title promo-title">Early Black Friday</h2>
     <div class="event-meta event-meta-center">
       <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M3.5 9h17M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v13A1.5 1.5 0 0 1 19 20.5H5A1.5 1.5 0 0 1 3.5 19V6A1.5 1.5 0 0 1 5 4.5Z"/></svg>8 y 9 de enero</span>
       <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Fountain Hills, Arizona</span>
@@ -1762,7 +1762,7 @@ body.modal-open {
       <!-- GENERAL -->
       <div class="tier-card">
         <div class="tier-name">General</div>
-        <div class="tier-price" data-prices="47,297,397" data-ref="397"><span class="price-old">$397</span> <span class="price-now">$47</span> <span class="price-off">88% OFF</span></div>
+        <div class="tier-price tier-price-offer"><span class="price-old">$397</span> <span class="price-now">$47</span> <span class="price-off">88% OFF</span></div>
         <ul class="tier-features">
           <li>Acceso completo al evento de dos días</li>
           <li>Networking con empresarios de alto nivel</li>
@@ -1774,7 +1774,7 @@ body.modal-open {
       <div class="tier-card featured">
         <div class="badge">Más popular</div>
         <div class="tier-name">VIP</div>
-        <div class="tier-price" data-prices="397,597,697" data-ref="997"><span class="price-old">$997</span> <span class="price-now">$397</span> <span class="price-off">60% OFF</span></div>
+        <div class="tier-price tier-price-offer"><span class="price-old">$997</span> <span class="price-now">$397</span> <span class="price-off">60% OFF</span></div>
         <ul class="tier-features">
           <li>Todo lo de General</li>
           <li>Silla preferencial</li>
@@ -1788,7 +1788,7 @@ body.modal-open {
       <!-- DIAMOND -->
       <div class="tier-card">
         <div class="tier-name">Diamond</div>
-        <div class="tier-price" data-prices="1497,1597,1697" data-ref="1997"><span class="price-old">$1,997</span> <span class="price-now">$1,497</span> <span class="price-off">25% OFF</span></div>
+        <div class="tier-price tier-price-offer"><span class="price-old">$1,997</span> <span class="price-now">$1,497</span> <span class="price-off">25% OFF</span></div>
         <ul class="tier-features">
           <li>Todo lo de VIP</li>
           <li>Almuerzo incluido con speakers los dos días</li>
@@ -1930,42 +1930,8 @@ window.addEventListener("resize", syncStickyBarHeight);
 window.addEventListener("load", syncStickyBarHeight);
 syncStickyBarHeight();
 
-// Precio vigente según la fecha (hora de Arizona, UTC-7). Se muestra el precio
-// actual, el precio de referencia tachado y el % de descuento; nunca se mencionan las fases.
-var PRICE_CHANGES = [Date.UTC(2026, 10, 5, 7), Date.UTC(2026, 11, 8, 7)]; // 5 nov, 8 dic
-
-function priceStep(now) {
-  return now >= PRICE_CHANGES[1] ? 2 : now >= PRICE_CHANGES[0] ? 1 : 0;
-}
-
-function updateTierPrices() {
-  var step = priceStep(Date.now());
-  var fmt = function (n) { return "$" + n.toLocaleString("en-US"); };
-  var maxOff = 0;
-
-  document.querySelectorAll(".tier-price[data-prices]").forEach(function (el) {
-    var prices = el.getAttribute("data-prices").split(",").map(Number);
-    var ref = Number(el.getAttribute("data-ref"));
-    var now = prices[step];
-    var off = ref > now ? Math.round((1 - now / ref) * 100) : 0;
-    maxOff = Math.max(maxOff, off);
-    el.querySelector(".price-now").textContent = fmt(now);
-    el.querySelector(".price-old").textContent = off > 0 ? fmt(ref) : "";
-    el.querySelector(".price-off").textContent = off > 0 ? off + "% OFF" : "";
-  });
-
-  var titles = ["Early Black Friday", "Precio especial", "Últimos cupos disponibles"];
-  var title = document.querySelector("[data-promo-title]");
-  var bar = document.querySelector("[data-bar-text]");
-  var offText = maxOff > 0 ? "Hasta " + maxOff + "% OFF" : "Cupos limitados";
-  if (title) title.textContent = titles[step];
-  if (bar) bar.textContent = "🔥 " + titles[step].toUpperCase() + " — " + offText.toUpperCase();
-}
-
-
 document.addEventListener("DOMContentLoaded", function () {
   syncStickyBarHeight();
-  updateTierPrices();
 
   // Botones "Reservar / Comprar" llevan directo al formulario (también dentro de GHL)
   // Popup de compra por tipo de entrada
