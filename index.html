@@ -678,9 +678,16 @@ footer .logo-img {
   }
 
   .guest-photo {
-    min-height: 280px;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    max-height: 560px;
     border-right: none;
     border-bottom: 1px solid var(--border);
+  }
+
+  .guest-photo-img,
+  .host-spotlight .guest-photo-img {
+    object-position: center top;
   }
 
   .guest-bio {
