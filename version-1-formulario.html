@@ -1583,6 +1583,7 @@ body.modal-open {
 .price-off { background: var(--accent-red) !important; box-shadow: 0 0 16px rgba(193, 18, 31, 0.35) !important; }
 .tier-price .price-free { font-family: "Oswald", Arial, sans-serif; font-size: 44px; font-weight: 700; line-height: 1;
   background: var(--red-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@media (min-width: 901px) { .tier-price .price-free { display: inline-block; margin-top: 50px; } }
 .eyebrow::before { animation: pulse-gold 2s ease-in-out infinite; }
 @keyframes pulse-gold { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 .venue-date { display: flex; align-items: center; gap: 14px; margin: 18px 0; padding: 14px 16px;
@@ -2010,7 +2011,7 @@ body.modal-open {
       <!-- GENERAL -->
       <div class="tier-card">
         <div class="tier-name">General</div>
-        <div class="tier-price tier-price-offer"><span class="price-old">$397</span> <span class="price-now price-free">Gratis</span></div>
+        <div class="tier-price tier-price-offer"><span class="price-now price-free">Gratis</span></div>
         <ul class="tier-features">
           <li>Acceso completo al evento de dos días</li>
           <li>Networking con empresarios de alto nivel</li>
