@@ -235,8 +235,8 @@ section:first-of-type { border-top: none; padding-top: 36px; padding-bottom: 20p
   background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .price-off { background: var(--red); color: #fff; border-radius: 100px; padding: 3px 9px; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; }
 .tier ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; flex: 1; }
-.tier li { display: flex; gap: 9px; font-size: 13px; color: var(--txt2); line-height: 1.5; }
-.tier li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+.tier li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--txt2); line-height: 1.5; margin: 0; padding: 0; }
+.tier li::before { content: ''; flex: none; width: 17px; height: 17px; margin-top: 1px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C09023' fill-opacity='.18'/%3E%3Cpath d='M6 10.4l2.7 2.7L14.2 7.4' fill='none' stroke='%23D6AE4E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; }
 .tier .btn-gold, .tier .btn-outline { width: 100%; }
 @media (max-width: 860px) { .tiers { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; } }
 
@@ -253,9 +253,12 @@ footer { padding: 24px 0 20px; border-top: 1px solid rgba(253,250,244,.05); marg
 .footer-links a:hover { color: var(--txt2); }
 .footer-copy { font-size: 10px; color: var(--txt3); width: 100%; text-align: center; margin-top: 12px; }
 .confirm-black { background: #000; color: var(--gold-lt); border: 1px solid rgba(192,144,35,.6); }
-.confirm-benefits { list-style: none; display: flex; width: fit-content; max-width: 100%; flex-direction: column; gap: 6px; margin: 16px auto 0; text-align: left; }
-.confirm-benefits li { display: flex; gap: 9px; font-size: 14px; color: var(--txt2); line-height: 1.5; }
-.confirm-benefits li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+.confirm-benefits-label { display: block; margin: 22px 0 10px; font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+.confirm-benefits { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 22px; max-width: 540px; margin: 0 auto 4px; padding: 18px 22px; text-align: left;
+  background: rgba(192,144,35,.05); border: 1px solid rgba(192,144,35,.2); border-radius: 10px; }
+.confirm-benefits li { display: flex; align-items: flex-start; gap: 10px; margin: 0; padding: 0; font-size: 14px; color: var(--txt2); line-height: 1.45; }
+.confirm-benefits li::before { content: ''; flex: none; width: 18px; height: 18px; margin-top: 1px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%23C09023' fill-opacity='.18'/%3E%3Cpath d='M6 10.4l2.7 2.7L14.2 7.4' fill='none' stroke='%23D6AE4E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; }
+@media (max-width: 560px) { .confirm-benefits { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -272,10 +275,11 @@ footer { padding: 24px 0 20px; border-top: 1px solid rgba(253,250,244,.05); marg
 
       <!-- TARJETA DE CONFIRMACIÓN -->
       <div class="confirm-card">
-        <div class="confirm-icon">✓</div>
+        <div class="confirm-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <p class="confirm-ticket-type">Tu ticket</p>
         <div class="confirm-ticket-name">Ticket Empire Black<br/>One Revolution</div>
         <span class="confirm-free confirm-black">Empire Black</span>
+        <span class="confirm-benefits-label">Tu entrada incluye</span>
         <ul class="confirm-benefits">
           <li>Todo lo de Diamond</li>
           <li>Experiencia viaje de 3 días todo incluido</li>
