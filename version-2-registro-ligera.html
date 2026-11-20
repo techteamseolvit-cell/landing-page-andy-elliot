@@ -1687,6 +1687,12 @@ img { max-width: 100%; }
 .venue-grid { grid-template-columns: 1fr !important; max-width: 640px; margin-left: auto; margin-right: auto; text-align: center; }
 .venue-date { text-align: left; }
 .final-cta-btn { margin-top: 8px; padding: 18px 44px; font-size: 18px; }
+/* En computadora el formulario arranca arriba, sin esperar al texto */
+@media (min-width: 901px) {
+  .hero-grid--form { align-items: start !important; }
+  .hero-grid--form .hero-form { align-self: start !important; margin-top: 0; }
+  .hero { padding-top: 28px !important; }
+}
 .cta-fijo {
   position: fixed; z-index: 998; right: 24px; bottom: 24px;
   display: inline-flex; align-items: center; justify-content: center;
@@ -1698,16 +1704,21 @@ img { max-width: 100%; }
 }
 .cta-fijo.is-hidden { opacity: 0; transform: translateY(20px); pointer-events: none; }
 @media (max-width: 900px) {
-  .hero-grid--form { display: flex !important; flex-direction: column; gap: 18px; }
+  /* En celular: lo primero que se ve es el formulario */
+  .sticky-bar { display: none !important; }
+  body { padding-top: 0 !important; }
+  .hero-grid--form { display: flex !important; flex-direction: column; gap: 14px; }
   .hero-grid--form .hero-content { display: contents; }
   .hero-grid--form .hero-content > * { position: relative; z-index: 1; }
-  .hero-grid--form .promo-pill { order: 1; align-self: center; margin: 0; }
-  .hero-grid--form .hero-content h1 { order: 2; margin: 0; font-size: clamp(25px, 7.4vw, 32px); }
-  .hero-grid--form .hero-form { order: 3; padding-top: 16px; }
+  .hero-grid--form .hero-content h1 { order: 1; margin: 0; text-align: center; font-size: clamp(21px, 6.2vw, 27px); line-height: 1.12; }
+  .hero-grid--form .hero-form { order: 2; padding: 12px 10px 6px; }
+  .hero-grid--form .hero-form-title { font-size: 19px; }
+  .hero-grid--form .hero-form-sub { display: none; }
+  .hero-grid--form .promo-pill { order: 3; align-self: center; margin: 4px 0 0; }
   .hero-grid--form .event-meta { order: 4; margin: 0; }
   .hero-grid--form .lead { order: 5; }
   .hero-grid--form .hero-visual { order: 6; }
-  .hero { padding-top: 22px !important; }
+  .hero { padding-top: 16px !important; }
   .cta-fijo { left: 16px; right: 16px; bottom: 14px; }
 }
 </style>
